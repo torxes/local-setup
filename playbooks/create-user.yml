@@ -1,0 +1,10 @@
+---
+- name: Create local user
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - vars/common-vars.yml
+
+  roles:
+    - create-user
+

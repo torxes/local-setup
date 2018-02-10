@@ -1,0 +1,7 @@
+---
+- name: Configure i3 as window manager
+  lineinfile:
+    path: /etc/sysconfig/windowmanager
+    regexp: '^DEFAULT_WM='
+    line: 'DEFAULT_WM="i3"'
+    state: present

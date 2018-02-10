@@ -1,0 +1,52 @@
+---
+
+- name: install base packages
+  zypper:
+    name: "{{ item }}"
+  with_items:
+    - make
+    - gcc
+    - gcc-c++
+    - automake
+    - cgdb
+    - cmake
+    - binutils
+    - binutils-devel
+    - binutils-gold
+    - gettext-tools
+
+    - git
+    - ctags
+    - bison
+    - flex
+
+    - rpm-build
+    - kernel-default
+    - kernel-source
+    - kernel-syms
+    - kbuild
+    - kexec-tools
+    - libcap-devel
+    - libcgroup-tools
+
+    - zsh
+    - i3
+    - i3-devel
+    - i3lock
+    - i3status
+    - dmenu
+
+    - urxvt-font-size
+    - rxvt-unicode
+    - xsel
+
+    - iftop
+    - htop
+
+    - docker
+    - docker-compose
+
+    - valgrind
+
+    - curl
+    - libcurl-devel

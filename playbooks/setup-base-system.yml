@@ -1,0 +1,13 @@
+---
+- name: Setup base system
+  hosts: localhost
+  become: yes
+  vars_files:
+    - ./vars/common-vars.yml
+
+  roles:
+    - common-packages
+    - setup-i3
+    - create-user
+
+

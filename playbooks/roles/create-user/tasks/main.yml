@@ -1,0 +1,14 @@
+---
+- name: install zsh
+  package:
+    name: zsh
+    state: latest
+
+- name: create user
+  user:
+    name: "{{ user_name }}"
+    shell: /bin/zsh
+    generate_ssh_key: yes
+    expires: no
+    createhome: yes
+    state: present

@@ -1,0 +1,50 @@
+Building python 3.6 on SUSE
+---------------------------
+
+FROM: https://stackoverflow.com/questions/41558535/python-3-6-installation-and-lib64
+
+The opensuse devel:languages:python:Factory python3 package has patches for that. Spec files are usually a good starting point.
+
+Note: the install step would install a python3 in /usr/local/bin. Changing that to altinstall avoids shadowing the system-wide python3.
+Install
+
+Create a downloads variable pointing to a directory where all downloaded files (python source and factory patches) will be saved
+
+export downloads=/usr/local/build/downloads
+
+In a user writable directory:
+
+tar --no-same-owner -xvf $downloads/Python-3.6.4.tar.xz
+cd Python-3.6.4
+
+patch -p1 < $downloads/python-3.6.0-multilib-new.patch
+patch -p0  < $downloads/python-3.3.0b1-localpath.patch
+patch -p0 < $downloads/python-3.3.0b1-curses-panel.patch
+
+# mind this step, otherwise
+# none of the modules in `lib-dynload` could be imported !
+autoreconf -i
+
+mkdir build; cd $_
+../configure --enable-optimizations --enable-ipv6 \
+             --with-fpectl --enable-shared --with-system-ffi \
+             --with-system-expat --enable-loadable-sqlite-extensions
+make -j $(nproc)
+# altinstall, not install (see above)
+sudo make altinstall
+
+
+
+Building python 3.6 with sqlite3
+1. install sqlite3
+$ wget https://www.sqlite.org/2017/sqlite-autoconf-3170000.tar.gz --no-check-certificate
+$ tar zxvf sqlite-autoconf-3170000.tar.gz
+$ cd sqlite-autoconf-3170000
+$ ./configure --prefix=/usr/local/sqlite3 --disable-static --enable-fts5 --enable-json1 CFLAGS="-g -O2 -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_FTS4=1 -DSQLITE_ENABLE_RTREE=1"
+
+2. install python3.6
+$ cd Python-3.6.0
+$ LD_RUN_PATH=/usr/local/sqlite3/lib ./configure --prefix=/usr/local/python3.6 LDFLAGS="-L/usr/local/sqlite3/lib" CPPFLAGS="-I /usr/local/sqlite3/include"
+$ LD_RUN_PATH=/usr/local/sqlite3/lib make
+$ LD_RUN_PATH=/usr/local/sqlite3/lib make install
+

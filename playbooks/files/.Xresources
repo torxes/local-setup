@@ -1,0 +1,65 @@
+URxvt*scrollBar: false
+!URxvt*font: xft:Source Code Pro:pixelsize=15
+!URxvt*font: xft:DejaVu Sans Mono:pixelsize=14:antialias=true
+
+Xft.autohint:  0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintfull
+Xft.hinting:   1
+Xft.antialias: 1
+Xft.dpi:       128
+Xft.rgba:      rgb
+
+URxvt.letterSpace:         0 
+!URxvt.font:                xft:Fantasque Sans Mono:pixelsize=16
+!URxvt.boldFont:            xft:Fantasque Sans Mono:pixelsize=16:style=Bold
+!URxvt.italicFont:            xft:Fantasque Sans Mono:pixelsize=16:style=Italic
+!URxvt.font:                xft:DejaVu Sans Mono:pixelsize=13
+!URxvt.boldFont:            xft:DejaVu Sans Mono:pixelsize=13:style=Bold
+!URxvt.italicFont:            xft:DejaVu Sans Mono:pixelsize=13:style=Italic
+!URxvt.font:                xft:Cousine:pixelsize=16
+!URxvt.boldFont:            xft:Cousine:pixelsize=16:style=Bold
+!URxvt.italicFont:            xft:Cousine:pixelsize=16:style=Italic
+!URxvt.font:                xft:Liberation Mono:pixelsize=13
+!URxvt.boldFont:            xft:Liberation Mono:pixelsize=13:style=Bold
+!URxvt.italicFont:            xft:Liberation Mono:pixelsize=13:style=Italic
+
+!URxvt.font:                xft:Source Code Pro:pixelsize=15
+!URxvt.boldFont:            xft:Source Code Pro:pixelsize=15:style=Bold
+!URxvt.italicFont:          xft:Source Code Pro:pixelsize=15:style=Italic
+
+URxvt.font:                xft:Cousine for Powerline:pixelsize=17,xft:unifont:style=Medium:antialias=false
+URxvt.boldFont:            xft:Cousine for Powerline:pixelsize=17:style=Bold
+URxvt.italicFont:          xft:Cousine for Powerline:pixelsize=17:style=Italic
+
+!URxvt.font:                xft:Source Code Pro for Powerline:pixelsize=17,xft:unifont:style=Medium:antialias=false
+!URxvt.boldFont:            xft:Source Code Pro for Powerline:pixelsize=17:style=Bold
+!URxvt.italicFont:          xft:Source Code Pro for Powerline:pixelsize=17:style=Italic
+
+!URxvt.font:                xft:Monospace:pixelsize=17
+!URxvt.boldFont:            xft:Monospace:pixelsize=17:style=Bold
+!URxvt.italicFont:          xft:Monospace:pixelsize=17:style=Italic
+
+
+URxvt.perl-ext-common:  font-size
+
+URxvt.font-size.step:  2
+URxvt.keysym.C-Up:     perl:font-size:increase
+URxvt.keysym.C-Down:   perl:font-size:decrease
+URxvt.keysym.C-S-Up:   perl:font-size:incglobal
+URxvt.keysym.C-S-Down: perl:font-size:decglobal
+
+!Xft.dpi: 92
+!Xft.antialias: false
+!Xft.rgba: rgb
+!Xft.hinting: true
+!Xft.hintstyle: hintfull
+
+
+xterm*scrollBar: false
+xterm*faceName: Source Code Pro
+xterm*faceSize: 16
+
+!dzen2.font: xft:DejaVu Sans Mono:pixelsize=12
+!dzen2.font: xft:DejaVu Sans Mono:pixelsize=12
+

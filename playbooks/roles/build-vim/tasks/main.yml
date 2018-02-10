@@ -1,0 +1,66 @@
+---
+- set_fact:
+    vim_sources: "{{ user.source_dir | default('/tmp') }}/vim"
+
+- name: Clone vim repository
+  git:
+    repo: "https://github.com/vim/vim.git"
+    force: no
+    version: "HEAD"
+    dest: "{{ vim_sources }}"
+
+- name: Ensure dependencies
+  become: yes
+  package:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - make
+    - gcc
+    - python
+    - python-devel
+    - python3
+    - python3-devel
+    - ncurses
+    - ncurses-devel
+    - lua51
+    - lua51-devel
+    - ruby
+    - ruby-devel
+    - lua51-luajit
+    - lua51-luajit-devel
+    - cscope
+    - ctags
+
+- name: Clean up
+  command: make distclean
+  args:
+    chdir: '{{ vim_sources }}'
+
+- name: Configure vim
+  command: >
+    ./configure --prefix={{ user.local_prefix }}
+      --with-features=huge
+      --enable-luainterp
+      --enable-rubyinterp
+      --enable-fontset
+      --enable-perlinterp
+      --enable-multibyte
+      --enable-pythoninterp
+      --with-python-config-dir=/usr/lib64/python2.7/config
+      --enable-python3interp
+      --with-python3-config-dir=/usr/lib64/python3.4/config-3.4m
+      --with-juajit
+      --with-x
+  args:
+    chdir: '{{ vim_sources }}'
+
+- name: Build vim
+  command: make -j5
+  args:
+    chdir: '{{ vim_sources }}'
+
+- name: Install vim
+  command: make install
+  args:
+    chdir: '{{ vim_sources }}'
