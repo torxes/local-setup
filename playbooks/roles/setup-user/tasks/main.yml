@@ -1,0 +1,60 @@
+---
+- name: Ensure i3 config dir
+  file:
+    dest: ~/.config/i3
+    state: directory
+
+- name: Configure i3
+  copy:
+    src: i3-config
+    dest: ~/.config/i3/config
+    backup: yes
+
+
+- name: Configure X
+  copy:
+    src: .Xresources
+    dest: ~/.Xresources
+    backup: yes
+
+
+- set_fact:
+    zsh_user_dir: "{{ user.local_prefix | default(ansible_env.HOME) }}/.zshrc_user"
+
+
+- name: setup zshrc
+  template:
+    src: zshrc.j2
+    dest: "{{ user_home }}/.zshrc"
+
+
+- name: Custom zshrc directory
+  file:
+    path: "{{ zsh_user_dir }}"
+    state: directory
+
+
+- name: Line custom directory
+  lineinfile:
+    path: "{{ user_home }}/.zshrc"
+    line: "for f in {{ zsh_user_dir }}/*; do source $f; done"
+    insertafter: EOF
+    state: present
+
+
+- name: Setup prompt
+  copy:
+    src: prompt.zshrc
+    dest: "{{ zsh_user_dir }}/prompt.zshrc"
+
+
+- name: Setup environmental vars
+  template:
+    src: env-vars.zshrc.j2
+    dest: "{{ zsh_user_dir }}/env-vars.zshrc"
+
+
+- name: Setup aliases
+  copy:
+    src: alias.zshrc
+    dest: "{{ zsh_user_dir }}/alias.zshrc"

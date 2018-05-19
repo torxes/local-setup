@@ -1,13 +1,16 @@
 ---
 - name: Setup base system
-  hosts: localhost
+  hosts: all
   become: yes
   vars_files:
     - ./vars/common-vars.yml
 
   roles:
     - common-packages
-    - setup-i3
     - create-user
+    - setup-i3
+
+    - {'role': powerline-fonts, 'become': yes,  'become_user': '{{ user_name }}' }
+    - {'role': setup-user, 'become': yes,  'become_user': '{{ user_name }}' }
 
 

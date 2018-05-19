@@ -1,8 +1,0 @@
----
-- name: Install vim
-  hosts: localhost
-  gather_facts: no
-  vars_files:
-    - ./vars/common-vars.yml
-  roles:
-    - build-vim

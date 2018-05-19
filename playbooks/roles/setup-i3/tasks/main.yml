@@ -1,7 +1,19 @@
 ---
+- name: Install packages
+  zypper:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - i3
+    - i3-devel
+    - i3status
+    - i3lock
+    - dmenu
+
 - name: Configure i3 as window manager
   lineinfile:
     path: /etc/sysconfig/windowmanager
     regexp: '^DEFAULT_WM='
     line: 'DEFAULT_WM="i3"'
     state: present
+

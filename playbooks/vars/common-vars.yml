@@ -7,7 +7,7 @@ user:
   home: '{{ user_home }}'
 
   local_prefix: '{{ user_home }}/.local'
-  local_path: "$PATH:/{{ user_home }}/.local/bin"
+  local_path: "{{ user_home }}/.local/bin"
 
   download_dir: '{{ user_home }}/downloads'
   sources_dir: '{{ user_home }}/sources'

@@ -27,7 +27,7 @@
     - kbuild
     - kexec-tools
     - libcap-devel
-    - libcgroup-tools
+#    - libcgroup-tools
 
     - zsh
     - i3
@@ -50,3 +50,5 @@
 
     - curl
     - libcurl-devel
+
+    - sudo

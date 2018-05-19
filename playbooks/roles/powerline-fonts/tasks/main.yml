@@ -1,0 +1,36 @@
+---
+- name: check powerline fonts installed
+  shell: fc-list | grep Powerline
+  register: powerline_check
+  changed_when: false
+  ignore_errors: yes
+
+
+- name: create temporary dir
+  tempfile:
+    state: directory
+  register: powerline_tmpdir
+  when: powerline_check.rc != 0
+
+
+- name: clone powerline fonts
+  git:
+    repo: "https://github.com/powerline/fonts.git"
+    depth: 1
+    dest: "{{ powerline_tmpdir.path }}"
+  when: powerline_check.rc != 0
+
+
+- name: install powerline fonts
+  command: ./install.sh
+  args:
+    chdir: "{{ powerline_tmpdir.path }}"
+  when: powerline_check.rc != 0
+
+
+- name: clean up
+  file:
+    path: "{{ powerline_tmpdir.path }}"
+    state: absent
+  when: powerline_check.rc != 0
+
